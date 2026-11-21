@@ -1,0 +1,15 @@
+[project]
+name = "zora-osint"
+version = "2.0.0"
+description = "ZORA OSINT Framework - modular recon toolkit"
+requires-python = ">=3.9"
+
+[project.scripts]
+zora = "zora.main:cli"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["zora*"]
