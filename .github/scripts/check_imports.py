@@ -1,6 +1,9 @@
 import importlib
+import os
 import pkgutil
 import sys
+
+sys.path.insert(0, os.getcwd())
 
 import zora.modules as modules_pkg
 
