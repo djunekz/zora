@@ -1,0 +1,38 @@
+name: Mark stale issues and pull requests
+
+on:
+  schedule:
+    # Every day at 01:00 UTC
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-stale: 60
+          days-before-close: 14
+          stale-issue-label: "stale"
+          stale-pr-label: "stale"
+          exempt-issue-labels: "bug,security,accuracy,pinned"
+          exempt-pr-labels: "pinned"
+          stale-issue-message: >
+            This issue has had no activity for 60 days and will be closed in
+            14 days if nothing changes. If it's still relevant, leaving any
+            comment (even just confirming it still happens) will keep it open.
+          stale-pr-message: >
+            This pull request has had no activity for 60 days and will be
+            closed in 14 days if nothing changes. Let us know if it's still
+            being worked on.
+          close-issue-message: >
+            Closing due to inactivity. Feel free to reopen or file a new
+            issue if this is still relevant.
+          close-pr-message: >
+            Closing due to inactivity. Feel free to reopen if you'd like to
+            continue this.

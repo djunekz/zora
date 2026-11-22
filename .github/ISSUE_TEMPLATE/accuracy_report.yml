@@ -1,0 +1,69 @@
+name: 🎯 Accuracy Report (false positive / false negative)
+description: A module reports something as found/valid/clean when it isn't, or vice versa
+title: "[Accuracy]: "
+labels: ["accuracy", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Several past bugs in this project were exactly this kind of issue
+        (e.g. a username checker reporting "found" for accounts that don't
+        exist, or a blacklist checker always reporting "clean" because the
+        underlying lookup silently failed). These reports are especially
+        valuable — please include as much detail as you can.
+
+  - type: input
+    id: module
+    attributes:
+      label: Affected module
+      placeholder: "e.g. 4 - Username OSINT (username_osint.py)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type of inaccuracy
+      options:
+        - False positive (reported as found/valid/vulnerable/listed, but isn't)
+        - False negative (reported as not found/clean/safe, but shouldn't be)
+        - Misleading label/wording (technically not wrong, but confusing)
+    validations:
+      required: true
+
+  - type: input
+    id: input-used
+    attributes:
+      label: Input used
+      placeholder: "the exact target/value you tested"
+    validations:
+      required: true
+
+  - type: textarea
+    id: tool-said
+    attributes:
+      label: What ZORA reported
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: ground-truth
+    attributes:
+      label: What is actually true
+      description: How did you verify this independently? (manual check, another tool, direct knowledge of the target, etc.)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - Termux (Android)
+        - Linux
+        - macOS
+        - Windows / WSL
+        - Other
+    validations:
+      required: true

@@ -1,0 +1,48 @@
+name: ✨ Feature Request
+description: Suggest a new module, a new data source, or an improvement
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion. Note that contributions which make an
+        existing module *more intrusive/offensive* (rather than more accurate
+        or more reliable), or that add new attack/exploitation capability, are
+        out of scope for this project — see
+        [CONTRIBUTING.md](../../CONTRIBUTING.md#responsible-use).
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: What kind of request is this?
+      options:
+        - New module
+        - New data source / lookup for an existing module
+        - Accuracy / reliability improvement
+        - CLI / UX improvement
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: What are you trying to do that ZORA can't currently do well?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How should this work? Mention any public API/data source involved.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any workarounds you're currently using, or other approaches you considered

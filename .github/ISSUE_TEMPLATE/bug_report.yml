@@ -1,0 +1,76 @@
+name: 🐛 Bug Report
+description: Report something that is broken, inaccurate, or not working as expected
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Before filing, please check
+        the [CHANGELOG](../../CHANGELOG.md) — your issue may already be fixed
+        in an unreleased change.
+
+        **Security issue?** Do not file it here. See
+        [SECURITY.md](../../SECURITY.md) for the private reporting process.
+
+  - type: input
+    id: module
+    attributes:
+      label: Affected module
+      description: Which module/menu number is this about?
+      placeholder: "e.g. 5 - Phone Intelligence (phone_intel.py)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What actually happened? Paste the exact output if possible.
+      render: shell
+    validations:
+      required: true
+
+  - type: input
+    id: input-used
+    attributes:
+      label: Input used
+      description: The exact target/value you entered (redact anything sensitive)
+      placeholder: "e.g. +6285645558880, example.com, 1.1.1.1"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - Termux (Android)
+        - Linux
+        - macOS
+        - Windows / WSL
+        - Other (specify below)
+    validations:
+      required: true
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python version
+      placeholder: "python3 --version"
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Full traceback, screenshots, or additional context
