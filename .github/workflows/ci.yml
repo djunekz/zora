@@ -69,6 +69,39 @@ jobs:
       - name: Lint with pyflakes (informational only)
         run: pyflakes zora/ || true
 
+  install-script:
+    name: install.sh end-to-end
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run install.sh
+        run: |
+          chmod +x install.sh uninstall.sh
+          ./install.sh
+
+      - name: zora command works after install
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          zora --help
+
+      - name: Run uninstall.sh
+        run: |
+          echo "n" | ./uninstall.sh
+
+      - name: Launcher is actually gone after uninstall
+        run: |
+          if [ -f "$HOME/.local/bin/zora" ]; then
+            echo "::error::uninstall.sh did not remove the launcher"
+            exit 1
+          fi
+
   gitignore-check:
     name: No tracked runtime artifacts
     runs-on: ubuntu-latest

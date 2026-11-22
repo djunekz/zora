@@ -53,7 +53,37 @@ Both are listed in [`requirements.txt`](requirements.txt).
 
 ## Installation
 
-### Linux / macOS
+### Quick install (recommended)
+
+Works on Linux, macOS, and Termux — the script detects the environment,
+installs Python if needed (Termux only), installs dependencies with the
+correct fallback for "externally-managed-environment" systems, verifies every
+module imports correctly, and installs a `zora` command.
+
+```bash
+git clone <this-repo-url>
+cd zora
+chmod +x install.sh
+./install.sh
+```
+
+Then run it with:
+
+```bash
+zora
+```
+
+To remove the `zora` command later:
+
+```bash
+./uninstall.sh
+```
+
+This only removes the launcher command, not the cloned folder itself, and it
+will ask before removing the `phonenumbers`/`dnspython` packages (in case
+something else on your system depends on them).
+
+### Manual install
 
 ```bash
 git clone <this-repo-url>
@@ -62,29 +92,25 @@ pip install -r requirements.txt
 python -m zora.main
 ```
 
-### Termux (Android)
+On Linux distributions that refuse `pip install` with an
+`externally-managed-environment` error, use
+`pip install --break-system-packages -r requirements.txt`, or create a
+virtual environment first (`python3 -m venv .venv && source .venv/bin/activate`).
+
+### Termux (Android) notes
 
 ZORA is built and tested to run cleanly on Termux, including on devices
-without root. A few extra packages make specific modules more accurate:
-
-```bash
-pkg update
-pkg install python
-pip install -r requirements.txt
-
-# Optional, improves accuracy of specific modules:
-pkg install termux-api   # accurate WiFi SSID/signal in "Local Network Scanner"
-                         # (also install the Termux:API companion app)
-```
-
-Everything else (WHOIS, DNS resolution, ARP/route lookups) works out of the
-box on Termux without any extra `pkg install` — these were historically
+without root. WHOIS, DNS resolution, and ARP/route lookups all work out of
+the box with no extra `pkg install` needed — these were historically
 implemented by shelling out to binaries (`whois`, `dig`, `arp`, `route`) that
 are **not** preinstalled on Termux, and have since been reimplemented in pure
 Python (see [`CHANGELOG.md`](CHANGELOG.md)).
 
+One optional package improves accuracy further:
+
 ```bash
-python -m zora.main
+pkg install termux-api   # accurate WiFi SSID/signal in "Local Network Scanner"
+                         # (also install the Termux:API companion app)
 ```
 
 ## Usage
@@ -209,6 +235,8 @@ zora/
     ui.py            sec/sub/res/bar/th/tr/... output helpers + automatic session log
   modules/           one file per module (ip_intel.py, domain_intel.py, ...)
   main.py            interactive menu + CLI entry point
+install.sh
+uninstall.sh
 requirements.txt
 CHANGELOG.md
 CONTRIBUTING.md
