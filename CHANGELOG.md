@@ -19,6 +19,9 @@ and this project adheres to semantic versioning.
 - `.github/PULL_REQUEST_TEMPLATE.md`
 - `.github/workflows/ci.yml` - syntax/import smoke test matrix, `install.sh`/`uninstall.sh` end-to-end test, and a check against committing runtime report artifacts
 - `.github/workflows/codeql.yml`, `dependency-review.yml`, `stale.yml`
+- `.github/workflows/auto-release.yml` - on a `vX.X.X` tag push, creates a GitHub Release named "Zora vX.X.X" with its body pulled from the matching `## [vX.X.X]` section of `CHANGELOG.md` (falls back to `## [Unreleased]` if that section doesn't exist yet)
+- `.github/scripts/extract_changelog.py` - extracts a single version's section from `CHANGELOG.md` for the release workflow above
+- `.github/dependabot.yml` - weekly dependency update checks for `pip` (`requirements.txt`) and GitHub Actions
 - Project restructured from a single 3344-line file into a modular package: `core/` (colors, constants, validate, net, ui) and `modules/` (one file per module, 42 total)
 - `main.py` - direct CLI invocation (`python -m zora.main <module> <target>`) alongside the interactive menu
 - `requirements.txt` - declares new dependencies: `phonenumbers`, `dnspython`

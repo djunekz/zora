@@ -97,6 +97,35 @@ Open an issue describing:
 - What actually happened (include the exact module, input, and output).
 - Your environment (OS/Termux version, Python version).
 
+## Releasing a New Version
+
+Releases are automated (`.github/workflows/auto-release.yml`): pushing a tag
+matching `vX.X.X` creates a GitHub Release named `Zora vX.X.X`, with its body
+pulled straight from `CHANGELOG.md`. For that to produce the right content:
+
+1. Before tagging, rename the `## [Unreleased]` heading to the version being
+   released, with today's date, e.g.:
+
+   ```markdown
+   ## [v2.1.0] - 2026-12-01
+   ```
+
+2. Add a fresh empty `## [Unreleased]` heading above it for whatever comes
+   next.
+3. Commit that change, then tag and push:
+
+   ```bash
+   git tag v2.1.0
+   git push origin v2.1.0
+   ```
+
+The workflow matches the tag (`v2.1.0`) against a `## [v2.1.0]` (or
+`## [2.1.0]`, the leading `v` is optional) heading in `CHANGELOG.md` and uses
+everything under it, up to the next `## [` heading, as the release body. If no
+matching heading exists yet (e.g. the very first release, or the heading
+rename was forgotten), it falls back to whatever is currently under
+`## [Unreleased]` instead of failing.
+
 ## Security Issues
 
 Do **not** open a public issue for a security-relevant bug. See
