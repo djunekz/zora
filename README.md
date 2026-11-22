@@ -2,7 +2,7 @@
 
 **A modular OSINT and network-reconnaissance toolkit, built in pure Python.**
 
-ZORA bundles 42 individual modules — IP/domain/email/phone/username
+ZORA bundles 43 individual modules — IP/domain/email/phone/username
 intelligence, DNS and certificate analysis, port scanning, web technology
 fingerprinting, breach/leak lookup links, and more — behind a single
 interactive menu or a scriptable CLI.
@@ -61,7 +61,7 @@ correct fallback for "externally-managed-environment" systems, verifies every
 module imports correctly, and installs a `zora` command.
 
 ```bash
-git clone <this-repo-url>
+git clone https://github.com/djunekz/zora.git
 cd zora
 chmod +x install.sh
 ./install.sh
@@ -86,7 +86,7 @@ something else on your system depends on them).
 ### Manual install
 
 ```bash
-git clone <this-repo-url>
+git clone https://github.com/djunekz/zora.git
 cd zora
 pip install -r requirements.txt
 python -m zora.main
@@ -121,7 +121,7 @@ pkg install termux-api   # accurate WiFi SSID/signal in "Local Network Scanner"
 python -m zora.main
 ```
 
-This prints the banner and the full numbered menu (0–42). Pick a number,
+This prints the banner and the full numbered menu (0–43). Pick a number,
 supply the target when prompted, and the module runs immediately.
 
 ### Direct CLI
@@ -151,8 +151,9 @@ python -m zora.main <module> <target> [extra]
 | `cms` | `python -m zora.main cms example.com` |
 | `dirbrute` | `python -m zora.main dirbrute example.com` |
 | `typosquat` | `python -m zora.main typosquat example.com` |
+| `update` | `python -m zora.main update` |
 
-Any other module (the remaining ~26) is reachable through the interactive
+Any other module (the remaining ~27) is reachable through the interactive
 menu by its number.
 
 ## Module Reference
@@ -222,6 +223,7 @@ menu by its number.
 | 40 | Hash & Crypto Toolbox | Hashing, encode/decode, Caesar cipher |
 | 41 | Bulk WHOIS Checker | WHOIS + expiry check across multiple domains at once |
 | 42 | Report Exporter | Saves everything run so far this session to a JSON report |
+| 43 | Check for Updates | Compares your version against the latest GitHub release |
 
 ## Project Structure
 

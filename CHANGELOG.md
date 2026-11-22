@@ -12,6 +12,13 @@ and this project adheres to semantic versioning.
 - `phone_intel.py` - removed dead variables `full`, `is_mobile`, `qn` left over from the pre-`phonenumbers` implementation
 
 ### Added
+- `update_checker.py` (menu 43 / CLI `update`) - checks the latest GitHub release for `djunekz/zora` and compares it against the running version
+- `.gitignore`, `LICENSE` (MIT), `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`
+- `install.sh` / `uninstall.sh` - environment-aware installer with `externally-managed-environment` (PEP 668) fallback handling, an import smoke test after install, and a `zora` launcher command
+- `.github/ISSUE_TEMPLATE/` - bug report, feature request, and accuracy report (false positive/negative) forms, plus issue-template chooser config
+- `.github/PULL_REQUEST_TEMPLATE.md`
+- `.github/workflows/ci.yml` - syntax/import smoke test matrix, `install.sh`/`uninstall.sh` end-to-end test, and a check against committing runtime report artifacts
+- `.github/workflows/codeql.yml`, `dependency-review.yml`, `stale.yml`
 - Project restructured from a single 3344-line file into a modular package: `core/` (colors, constants, validate, net, ui) and `modules/` (one file per module, 42 total)
 - `main.py` - direct CLI invocation (`python -m zora.main <module> <target>`) alongside the interactive menu
 - `requirements.txt` - declares new dependencies: `phonenumbers`, `dnspython`
@@ -31,6 +38,10 @@ and this project adheres to semantic versioning.
 - All modules - comments (`#`) and docstrings (`"""..."""`) stripped via `ast` + `tokenize` (not regex), so strings/URLs containing `#` were not corrupted
 
 ### Fixed
+- `requirements.txt` - was missing `dnspython`, which `core/net.py` imports directly (`import dns.resolver`); a fresh `pip install -r requirements.txt` would succeed but every DNS/WHOIS-dependent module would then raise `ModuleNotFoundError: No module named 'dns'` at runtime
+- `.github/workflows/ci.yml` - the import-smoke-test step used an indented heredoc (`<<'PYEOF' ... PYEOF`) inside a YAML block scalar; since the closing delimiter wasn't at column 0, bash never recognized it as the end of the heredoc, which fed the literal (indented) Python source to the interpreter and raised `IndentationError` on every Python version — replaced with a checked-in script (`.github/scripts/check_imports.py`)
+- `.github/workflows/ci.yml` - the Python 3.9 matrix job failed on `ubuntu-latest` (Ubuntu 26.04) because `actions/setup-python` has no 3.9 x64 build for that image; pinned that job to `ubuntu-22.04`, which still has it
+- `.github/ISSUE_TEMPLATE/config.yml` - replaced the `OWNER/REPO` placeholder with the actual repository (`djunekz/zora`)
 - `report_exporter.py` - always wrote an empty JSON report because it never received scan results from other modules; now pulls automatically from the session log
 - `username_osint.py` - a profile was marked "found" based solely on HTTP 200, even though many platforms (Instagram, TikTok, X/Twitter, Telegram) always return 200 for nonexistent usernames (soft-404)
 - `dir_brute.py`, `api_finder.py` - the same soft-404 issue: a catch-all/SPA server made every wordlist entry read as "found"

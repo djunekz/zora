@@ -40,3 +40,4 @@ from zora.modules.url_analyzer import URLAnalyzer
 from zora.modules.network_diag import NetworkDiag
 from zora.modules.bulk_whois import BulkWhois
 from zora.modules.report_exporter import ReportExporter
+from zora.modules.update_checker import UpdateChecker

@@ -15,7 +15,7 @@ from zora.modules import (
     CMSScanner, RedirectTester, DirBrute, TakeoverChecker, APIFinder,
     ProxyChecker, ShodanFree, PeopleOSINT, DarkWebMonitor, CTMonitor,
     TyposquatChecker, PassiveDNS, DorkGenerator, SocMINT, BreachResources,
-    CryptoToolbox, BulkWhois, ReportExporter,
+    CryptoToolbox, BulkWhois, ReportExporter, UpdateChecker,
 )
 
 def print_menu():
@@ -76,6 +76,7 @@ def print_menu():
 {C.BCYAN}│{C.R}  {C.BWHITE}42{C.R}  {C.BOLD}Report Exporter{C.R}              {C.GRAY}Save scan results as JSON report{C.R}
 {C.BCYAN}│{C.R}
 {C.BCYAN}├─ SYSTEM{C.R}
+{C.BCYAN}│{C.R}  {C.BWHITE}43{C.R}  {C.BOLD}Check for Updates{C.R}           {C.GRAY}Compare your version against the latest GitHub release{C.R}
 {C.BCYAN}│{C.R}  {C.BWHITE} 0{C.R}  {C.BOLD}Exit{C.R}
 {C.BCYAN}└{'─'*(w-2)}{C.R}""")
 
@@ -93,7 +94,7 @@ def main():
     while True:
         print_menu()
         try:
-            ch=input(f"\n  {C.BMAGENTA}❯{C.R} {C.BOLD}Select [{C.BCYAN}0-42{C.BOLD}]:{C.R} ").strip()
+            ch=input(f"\n  {C.BMAGENTA}❯{C.R} {C.BOLD}Select [{C.BCYAN}0-43{C.BOLD}]:{C.R} ").strip()
             if ch=="0":
                 print(f"\n  {C.BGREEN}Thanks for using ZORA v{VERSION}! 🚀{C.R}\n"); break
             elif ch=="1":  IPIntel.run(inp("Enter IP address")); pause()
@@ -140,6 +141,7 @@ def main():
             elif ch=="40": CryptoToolbox.analyze(inp("Enter text")); pause()
             elif ch=="41": BulkWhois.run(inp("Enter domains (comma/space separated)")); pause()
             elif ch=="42": ReportExporter.quick_save(inp("Enter target name/description")); pause()
+            elif ch=="43": UpdateChecker.run(); pause()
             else:
                 err("Invalid option"); time.sleep(1)
                 print("\n" * 2); print_banner()
@@ -172,6 +174,7 @@ def run_cli():
         "cms": lambda: CMSScanner.run(args.target),
         "dirbrute": lambda: DirBrute.run(args.target),
         "typosquat": lambda: TyposquatChecker.run(args.target),
+        "update": lambda: UpdateChecker.run(),
     }
 
     if args.module and args.module in direct:
