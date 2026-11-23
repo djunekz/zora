@@ -1,19 +1,6 @@
 import re
-import socket
-import ssl
-import json
-import time
-import base64
-import hashlib
-import threading
-import ipaddress
-import subprocess
-import urllib.request
-import urllib.parse
-import urllib.error
-from datetime import datetime
 
-from zora.core import *
+from zora.core import C, COMMON_PORTS, bar, cmd, dots, err, grab_banner, is_ip, is_ipv6, ok, port_open, req_json, res, reverse_dns, sec, sub, th, tr, warn
 
 
 class IPIntel:

@@ -1,22 +1,10 @@
 import re
-import os
 import socket
-import ssl
 import json
-import time
-import base64
 import struct
-import hashlib
 import shutil
-import threading
-import ipaddress
-import subprocess
-import urllib.request
-import urllib.parse
-import urllib.error
-from datetime import datetime
 
-from zora.core import *
+from zora.core import COMMON_PORTS, cmd, ok, port_open, res, reverse_dns, sec, sub, th, tr, warn
 
 
 class LocalNetScanner:
@@ -85,13 +73,13 @@ class LocalNetScanner:
         sub("📶 WiFi Info")
         wlan_iface = next((i for i,_ in interfaces if re.match(r'^(wlan|wifi)\d*$', i)), None)
         wlan_ip = next((ip for i,ip in interfaces if i == wlan_iface), None)
-        tw = LocalNetScanner._termux_wifi_info()
-        if tw:
-            if tw.get("ssid"): res("SSID", tw["ssid"], "info")
-            if tw.get("bssid"): res("BSSID", tw["bssid"], "info")
-            if tw.get("rssi") is not None: res("Signal (RSSI)", f"{tw['rssi']} dBm", "info")
-            if tw.get("link_speed") is not None: res("Link Speed", f"{tw['link_speed']} Mbps", "info")
-            if tw.get("frequency") is not None: res("Frequency", f"{tw['frequency']} MHz", "info")
+        wifi_json = LocalNetScanner._termux_wifi_info()
+        if wifi_json:
+            if wifi_json.get("ssid"): res("SSID", wifi_json["ssid"], "info")
+            if wifi_json.get("bssid"): res("BSSID", wifi_json["bssid"], "info")
+            if wifi_json.get("rssi") is not None: res("Signal (RSSI)", f"{wifi_json['rssi']} dBm", "info")
+            if wifi_json.get("link_speed") is not None: res("Link Speed", f"{wifi_json['link_speed']} Mbps", "info")
+            if wifi_json.get("frequency") is not None: res("Frequency", f"{wifi_json['frequency']} MHz", "info")
         else:
             wifi_info=cmd(["iwconfig"]) or cmd(["nmcli","dev","wifi"])
             ssid_m = re.search(r'ESSID:"([^"]+)"', wifi_info) if wifi_info else None

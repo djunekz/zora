@@ -1,22 +1,11 @@
-import re
-import socket
-import ssl
-import json
-import time
-import base64
-import hashlib
 import difflib
-import threading
-import ipaddress
-import subprocess
 import urllib.request
 import urllib.parse
 import urllib.error
-from datetime import datetime
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from zora.core import *
+from zora.core import C, USER_AGENT, bar, err, inf, is_user, ok, req_json, res, sec, sub, th, tr
 
 MAX_WORKERS = 25
 PROBE_USERNAME = "zzq9xf3knotarealuser00112233"

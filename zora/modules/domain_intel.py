@@ -1,19 +1,9 @@
 import re
 import socket
 import ssl
-import json
-import time
-import base64
-import hashlib
-import threading
-import ipaddress
-import subprocess
-import urllib.request
-import urllib.parse
-import urllib.error
 from datetime import datetime
 
-from zora.core import *
+from zora.core import C, bar, dns_query, dots, err, is_domain, ok, req_headers, req_text, res, sec, sub, th, tr, warn, whois_query
 
 
 class DomainIntel:
@@ -90,6 +80,7 @@ class DomainIntel:
         dots("Checking SSL")
         try:
             ctx=ssl.create_default_context()
+            ctx.minimum_version = ssl.TLSVersion.TLSv1_2
             with socket.create_connection((domain,443),timeout=5) as sk:
                 with ctx.wrap_socket(sk,server_hostname=domain) as ss:
                     cert=ss.getpeercert(); ci=ss.cipher(); ver=ss.version()

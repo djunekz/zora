@@ -1,20 +1,7 @@
-import re
 import socket
-import ssl
-import json
-import time
-import base64
-import hashlib
-import threading
-import ipaddress
-import subprocess
-import urllib.request
-import urllib.parse
-import urllib.error
-from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from zora.core import *
+from zora.core import bar, err, grab_banner, inf, ok, port_open, sec, sub, th, tr, warn
 
 MAX_WORKERS = 100
 

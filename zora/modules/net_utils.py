@@ -1,19 +1,7 @@
 import re
 import socket
-import ssl
-import json
-import time
-import base64
-import hashlib
-import threading
-import ipaddress
-import subprocess
-import urllib.request
-import urllib.parse
-import urllib.error
-from datetime import datetime
 
-from zora.core import *
+from zora.core import cmd, ok, req_json, req_text, res, sec, sub
 
 
 class NetUtils:
@@ -36,7 +24,6 @@ class NetUtils:
 
         sub("🔍 Local Network Info")
         hostname=socket.gethostname()
-        local_ip="N/A"
         try:
             s=socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             s.settimeout(1)
@@ -45,7 +32,7 @@ class NetUtils:
             s.close()
         except Exception:
             try: local_ip=socket.gethostbyname(hostname)
-            except: local_ip="N/A"
+            except Exception: local_ip="N/A"
         res("Hostname",  hostname,"info")
         res("Local IP",  local_ip,"info")
 

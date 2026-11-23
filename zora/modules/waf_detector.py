@@ -1,19 +1,5 @@
-import re
-import socket
-import ssl
-import json
-import time
-import base64
-import hashlib
-import threading
-import ipaddress
-import subprocess
-import urllib.request
-import urllib.parse
-import urllib.error
-from datetime import datetime
 
-from zora.core import *
+from zora.core import C, dots, ok, req_headers, req_text, res, sec, sub, warn
 
 
 class WAFDetector:

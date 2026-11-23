@@ -1,19 +1,8 @@
-import re
 import socket
 import ssl
-import json
 import time
-import base64
-import hashlib
-import threading
-import ipaddress
-import subprocess
-import urllib.request
-import urllib.parse
-import urllib.error
-from datetime import datetime
 
-from zora.core import *
+from zora.core import ok, req_headers, res, sec, sub, th, tr, warn
 
 
 class BannerGrabber:
@@ -62,6 +51,7 @@ class BannerGrabber:
         sub("🔐 SSL/TLS Fingerprint")
         try:
             ctx = ssl.create_default_context()
+            ctx.minimum_version = ssl.TLSVersion.TLSv1_2
             ctx.check_hostname=False; ctx.verify_mode=ssl.CERT_NONE
             with socket.create_connection((target,443),timeout=5) as sk:
                 with ctx.wrap_socket(sk,server_hostname=target) as ss:

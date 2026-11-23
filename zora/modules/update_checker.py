@@ -1,4 +1,4 @@
-from zora.core import *
+from zora.core import C, VERSION, dots, inf, ok, req_json, res, sec, sub, warn
 
 GITHUB_REPO = "djunekz/zora"
 

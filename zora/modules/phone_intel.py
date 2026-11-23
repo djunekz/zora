@@ -6,7 +6,7 @@ import urllib.error
 import phonenumbers
 from phonenumbers import geocoder, carrier, timezone as pn_timezone, PhoneNumberFormat, PhoneNumberType, number_type
 
-from zora.core import *
+from zora.core import C, dots, err, ok, req_headers, req_json, res, sec, sub, th, tr, warn
 
 
 CURRENCY_BY_REGION = {
@@ -17,7 +17,7 @@ CURRENCY_BY_REGION = {
     "JP":"JPY","KR":"KRW","CN":"CNY","IN":"INR","PK":"PKR","BD":"BDT","AU":"AUD","NZ":"NZD",
     "BR":"BRL","MX":"MXN","AR":"ARS","CL":"CLP","CO":"COP","PE":"PEN","VE":"VES","SA":"SAR",
     "AE":"AED","QA":"QAR","KW":"KWD","BH":"BHD","OM":"OMR","IL":"ILS","JO":"JOD","LB":"LBP",
-    "IQ":"IQD","IR":"IRR","PK":"PKR","LK":"LKR","MM":"MMK","KH":"KHR","LA":"LAK","HK":"HKD",
+    "IQ":"IQD","IR":"IRR","LK":"LKR","MM":"MMK","KH":"KHR","LA":"LAK","HK":"HKD",
     "TW":"TWD","MO":"MOP",
 }
 
