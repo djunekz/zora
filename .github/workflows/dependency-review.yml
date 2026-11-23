@@ -12,6 +12,7 @@ jobs:
   dependency-review:
     name: Scan dependency changes
     runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
     steps:
       - name: Check out repository
         uses: actions/checkout@v4

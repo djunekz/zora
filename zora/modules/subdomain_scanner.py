@@ -1,17 +1,4 @@
-import re
 import socket
-import ssl
-import json
-import time
-import base64
-import hashlib
-import threading
-import ipaddress
-import subprocess
-import urllib.request
-import urllib.parse
-import urllib.error
-from datetime import datetime
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -19,7 +6,7 @@ import dns.query
 import dns.zone
 import dns.exception
 
-from zora.core import *
+from zora.core import C, bar, dns_query, inf, ok, res, reverse_dns, sec, sub, th, tr, warn
 
 MAX_WORKERS = 60
 

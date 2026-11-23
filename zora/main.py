@@ -5,7 +5,7 @@ import time
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from zora.core import C, VERSION, tw, print_banner, sec, err
+from zora.core import C, VERSION, tw, print_banner, err
 from zora.modules import (
     IPIntel, DomainIntel, EmailIntel, UsernameOSINT, PhoneIntel,
     PortScanner, CIDRScanner, DNSAnalyzer, SubdomainAdvanced, BGPLookup,

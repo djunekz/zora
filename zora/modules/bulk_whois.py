@@ -1,19 +1,7 @@
 import re
-import socket
-import ssl
-import json
-import time
-import base64
-import hashlib
-import threading
-import ipaddress
-import subprocess
-import urllib.request
-import urllib.parse
-import urllib.error
 from datetime import datetime
 
-from zora.core import *
+from zora.core import bar, inf, is_domain, ok, sec, sub, th, tr, warn, whois_query
 
 
 class BulkWhois:

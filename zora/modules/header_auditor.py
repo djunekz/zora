@@ -1,19 +1,6 @@
 import re
-import socket
-import ssl
-import json
-import time
-import base64
-import hashlib
-import threading
-import ipaddress
-import subprocess
-import urllib.request
-import urllib.parse
-import urllib.error
-from datetime import datetime
 
-from zora.core import *
+from zora.core import C, err, ok, req_headers, res, sec, sub, warn
 
 
 class HeaderAuditor:
@@ -52,7 +39,7 @@ class HeaderAuditor:
         score = 0; missing = []; weak = []
         sub("📋 Header Analysis")
         for header, cfg in HeaderAuditor.HDRS.items():
-            val = headers.get(header,"")
+            val = str(headers.get(header,"") or "")
             if not val:
                 missing.append(header)
                 res(f"✗ {cfg['desc']}", "MISSING", "error")
