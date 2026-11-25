@@ -45,7 +45,7 @@ interactive menu or a scriptable CLI.
 
 ## Requirements
 
-- Python **3.9+**
+- Python **3.10+** (Python 3.9 reached end-of-life in October 2025 and is no longer supported, since some dependencies have already dropped it)
 - `phonenumbers` — accurate, offline phone number parsing/validation
 - `dnspython` — pure-Python DNS resolution (no `dig` binary required)
 
