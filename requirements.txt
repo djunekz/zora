@@ -1,2 +1,2 @@
-phonenumbers>=9.0.0
+phonenumbers>=9.0.43
 dnspython>=2.8.0
