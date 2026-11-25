@@ -9,7 +9,7 @@ and this project adheres to semantic versioning.
 
 ---
 
-## [v2.1.0] - 2026-11-25
+## [v2.2.0] - 2026-11-25
 
 ### Removed
 - `phone_intel.py` - removed `COUNTRY_CODES` dict, duplicated by `PHONE_DB` and never referenced anywhere (dead code)
