@@ -1,5 +1,5 @@
 [project]
-name = "zora-osint"
+name = "zora"
 version = "2.1.0"
 description = "ZORA OSINT Framework - modular recon toolkit"
 requires-python = ">=3.9"
