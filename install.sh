@@ -29,17 +29,17 @@ if ! command -v python3 >/dev/null 2>&1; then
         info "python3 not found — installing via pkg..."
         pkg update -y && pkg install -y python || fail "pkg install python failed."
     else
-        fail "python3 not found. Install Python 3.9+ with your system's package manager, then re-run this script."
+        fail "python3 not found. Install Python 3.10+ with your system's package manager, then re-run this script."
     fi
 fi
 
 PY_OK=$(python3 - <<'PYEOF'
 import sys
-print(1 if sys.version_info >= (3, 9) else 0)
+print(1 if sys.version_info >= (3, 10) else 0)
 PYEOF
 )
 if [ "$PY_OK" != "1" ]; then
-    fail "Python 3.9+ is required. Found: $(python3 --version 2>&1)"
+    fail "Python 3.10+ is required. Found: $(python3 --version 2>&1)"
 fi
 ok "Using $(python3 --version 2>&1)"
 
