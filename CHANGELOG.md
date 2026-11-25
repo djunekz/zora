@@ -7,6 +7,10 @@ and this project adheres to semantic versioning.
 
 ## [Unreleased]
 
+---
+
+## [v2.1.0] - 2026-11-25
+
 ### Removed
 - `phone_intel.py` - removed `COUNTRY_CODES` dict, duplicated by `PHONE_DB` and never referenced anywhere (dead code)
 - `phone_intel.py` - removed dead variables `full`, `is_mobile`, `qn` left over from the pre-`phonenumbers` implementation
